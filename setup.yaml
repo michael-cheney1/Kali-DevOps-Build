@@ -83,28 +83,28 @@
       deb: https://az764295.vo.msecnd.net/stable/30d9c6cd9483b2cc586687151bcbcd635f373630/code_1.68.1-1655263094_amd64.deb
   - name: Copy a ZSH profile
     ansible.builtin.copy:
-      src: /home/kali/Kali_Build/config/.zshrc
+      src: /home/kali/Kali-DevOps-Build/config/.zshrc
       dest: /home/kali/.zshrc
       owner: kali
       group: kali
       mode: '0644'
   - name: Copy a Tmux profile
     ansible.builtin.copy:
-      src: /home/kali/Kali_Build/config/.tmux.conf
+      src: /home/kali/Kali-DevOps-Build/config/.tmux.conf
       dest: /home/kali/.tmux.conf
       owner: kali
       group: kali
       mode: '0644'
   - name: Copy a p10k profile
     ansible.builtin.copy:
-      src: /home/kali/Kali_Build/config/.p10k.zsh
+      src: /home/kali/Kali-DevOps-Build/config/.p10k.zsh
       dest: /home/kali/.p10k.zsh
       owner: kali
       group: kali
       mode: '0644'
-   - name: Copy ctf script
+  - name: Copy ctf script
     ansible.builtin.copy:
-      src: /home/kali/Kali_Build/scripts/ctf
+      src: /home/kali/Kali-DevOps-Build/scripts/ctf
       dest: /usr/local/sbin/ctf
       owner: kali
       group: kali
@@ -135,7 +135,7 @@
       state: directory
   - name: Copy ipaddress script
     ansible.builtin.copy:
-      src: /home/kali/Kali_Build/scripts/ipaddress.sh
+      src: /home/kali/Kali-DevOps-Build/scripts/ipaddress.sh
       dest: /home/kali/scripts/ipaddress.sh
       owner: kali
       group: kali
@@ -183,6 +183,6 @@
   - name: Start Guake Terminal
     command: su -c 'guake &' kali
   - name: Configure Guake Terminal
-    command: su -c 'guake --restore-preferences=/home/kali/Kali_Build/config/guake.conf' kali
+    command: su -c 'guake --restore-preferences=/home/kali/Kali-DevOps-Build/config/guake.conf' kali
   - name: Set Timezone
     command: timedatectl set-timezone Australia/Sydney
