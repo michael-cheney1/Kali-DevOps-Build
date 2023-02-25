@@ -5,7 +5,7 @@ Building your standard Kali environment using Ansible
 
 ### TLDR
 
-Run ansible, get all packages, repositories and configurations required to make the console pretty. Also get a nice script to load tmux with a nice template for playing CTFs. 
+Run ansible, get all packages, repositories and configurations required to make the console pretty. Also get a script to load tmux with a nice template for playing CTFs. 
 
 ### Summary
 
