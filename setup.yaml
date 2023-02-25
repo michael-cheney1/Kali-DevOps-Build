@@ -1,0 +1,188 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install python3-venv
+    package:
+      name: python3-venv
+      state: present
+  - name: Install Bloodhound
+    package:
+      name: bloodhound
+      state: present
+  - name: Install FileZilla
+    package:
+      name: filezilla
+      state: present
+  - name: Install Remmina
+    package:
+      name: remmina
+      state: present
+  - name: Install Docker
+    package:
+      name: docker.io
+      state: present
+  - name: Install Gobuster
+    package: 
+      name: gobuster
+      state: present
+  - name: Install Seclists
+    package:
+      name: seclists
+      state: present
+  - name: Install Feroxbuster
+    package:
+      name: feroxbuster
+      state: present
+  - name: Install oscanner
+    package:
+      name: oscanner
+      state: present
+  - name: Install Redis Tools
+    package:
+      name: redis-tools
+      state: present
+  - name: Install sipvicious
+    package:
+      name: sipvicious 
+      state: present
+  - name: Install tnscmd10g
+    package:
+      name: tnscmd10g 
+      state: present  
+  - name: Install wkhtmltopdf
+    package:
+      name: wkhtmltopdf 
+      state: present
+  - name: Install xclip
+    package:
+      name: xclip 
+      state: present
+  - name: Install chisel
+    package:
+      name: chisel 
+      state: present
+  - name: Install mingw-w64
+    package:
+      name: mingw-w64 
+      state: present
+  - name: Install guake
+    package:
+      name: guake
+      state: present
+  - name: Install dconf-cli
+    package:
+      name: dconf-cli
+      state: present
+  - name: Install gnome-font-viewer
+    package:
+      name: gnome-font-viewer
+      state: present
+  - name: Install Visual Studio
+    apt:
+      deb: https://az764295.vo.msecnd.net/stable/30d9c6cd9483b2cc586687151bcbcd635f373630/code_1.68.1-1655263094_amd64.deb
+  - name: Copy a ZSH profile
+    ansible.builtin.copy:
+      src: /home/kali/Kali_Build/config/.zshrc
+      dest: /home/kali/.zshrc
+      owner: kali
+      group: kali
+      mode: '0644'
+  - name: Copy a Tmux profile
+    ansible.builtin.copy:
+      src: /home/kali/Kali_Build/config/.tmux.conf
+      dest: /home/kali/.tmux.conf
+      owner: kali
+      group: kali
+      mode: '0644'
+  - name: Copy a p10k profile
+    ansible.builtin.copy:
+      src: /home/kali/Kali_Build/config/.p10k.zsh
+      dest: /home/kali/.p10k.zsh
+      owner: kali
+      group: kali
+      mode: '0644'
+   - name: Copy ctf script
+    ansible.builtin.copy:
+      src: /home/kali/Kali_Build/scripts/ctf
+      dest: /usr/local/sbin/ctf
+      owner: kali
+      group: kali
+      mode: '0777'
+  - name: Clone tmux-plugin tpm github repository
+    git:
+      repo: https://github.com/tmux-plugins/tpm
+      dest: /home/kali/.tmux/plugins/tpm
+      clone: yes
+      update: yes
+  - name: Clone powerlevel10k github repository
+    git:
+      repo: https://github.com/romkatv/powerlevel10k.git
+      dest: /home/kali/powerlevel10k
+      clone: yes
+      update: yes
+  - name: Create directory for font files
+    file:
+      path: /home/kali/.local/share/fonts
+      state: directory
+  - name: Create directory for share
+    file:
+      path: /home/kali/share
+      state: directory
+  - name: Create directory for scripts
+    file:
+      path: /home/kali/scripts
+      state: directory
+  - name: Copy ipaddress script
+    ansible.builtin.copy:
+      src: /home/kali/Kali_Build/scripts/ipaddress.sh
+      dest: /home/kali/scripts/ipaddress.sh
+      owner: kali
+      group: kali
+      mode: '0777'
+  - name: Download & Install pspy32
+    get_url:
+      url: https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32
+      dest: '/home/kali/share/pspy32'
+  - name: Download & Install pspy64
+    get_url:
+      url: https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64
+      dest: '/home/kali/share/pspy64'
+  - name: Download & Install linpeas
+    get_url:
+      url: https://github.com/carlospolop/PEASS-ng/releases/download/20220703/linpeas.sh
+      dest: '/home/kali/share/linpeas.sh'
+  - name: Download & Install MesloLGS NF Regular.ttf
+    get_url:
+      url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+      dest: '/home/kali/.local/share/fonts/MesloLGS NF Regular.ttf'
+  - name: Download & Install MesloLGS NF Bold.ttf
+    get_url:
+      url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+      dest: '/home/kali/.local/share/fonts/MesloLGS NF Bold.ttf'
+  - name: Download & Install MesloLGS NF Italic.ttf
+    get_url:
+      url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+      dest: '/home/kali/.local/share/fonts/MesloLGS NF Italic.ttf'
+  - name: Download & Install MesloLGS NF Bold Italic.ttf
+    get_url:
+      url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+      dest: '/home/kali/.local/share/fonts/MesloLGS NF Bold Italic.ttf'
+  - name: Change permissions of .tmux folder
+    command: chown -R kali:kali /home/kali/.tmux/
+  - name: Change permissions of powerlevel10k folder
+    command: chown -R kali:kali /home/kali/powerlevel10k/
+  - name: Change permissions of scripts folder
+    command: chown -R kali:kali /home/kali/scripts/
+  - name: Change permissions of share folder
+    command: chown -R kali:kali /home/kali/share/
+  - name: Change permissions of share pspy32
+    command: chmod +x /home/kali/share/pspy32
+  - name: Change permissions of share pspy64
+    command: chmod +x /home/kali/share/pspy64
+  - name: Start Guake Terminal
+    command: su -c 'guake &' kali
+  - name: Configure Guake Terminal
+    command: su -c 'guake --restore-preferences=/home/kali/Kali_Build/config/guake.conf' kali
+  - name: Set Timezone
+    command: timedatectl set-timezone Australia/Sydney
