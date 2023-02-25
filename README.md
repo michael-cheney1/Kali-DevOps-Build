@@ -61,10 +61,16 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 ## Installation
 
 1. Install Ansible `sudo apt install ansible -y`
-2. Clone the repository `git clone https://github.com/Michael-Cheney/Kali_Build.git`
-3. Run setup.yaml Ansible file `ansible-playbook Kali_Build/setup.yaml`
 
+![](images\2023-02-25 15_58_23-Window.png)
 
+2. Clone the repository `git clone https://github.com/michael-cheney1/Kali-DevOps-Build.git`
+
+![images/](images\2023-02-25 15_56_02-Window.png)
+
+3. Run Ansible configuration file `ansible-playbook Kali-DevOps-Build/setup.yaml`
+
+![](images\2023-02-25 16_04_18-Window.png)
 
 ## Customisation
 
