@@ -7,6 +7,8 @@ Building your standard Kali environment using Ansible
 
 Run ansible, get all packages, repositories and configurations required to make the console pretty. Also get a script to load tmux with a nice template for playing CTFs. 
 
+
+
 ### Summary
 
 The purpose of this guide is to share with you my automated Kali build. Anyone who has used Kali for some time has no doubt broken it multiple times and been faced with the prospect of having to rebuild a machine that you have spent countless hours perfecting. Many people utilise Virtual Machines and snapshots to be able to have a **known good** build that they can simply clone. I have also used this approach in the past however updating to the latest build can become arduous and can occasionally break things.  So to simplify the process you can use automation then if you add packages / repositories / download files later it's relatively straight forward to add these items into an Ansible template especially when you have some examples to work from. 
@@ -72,9 +74,11 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 
 ![](images/2023-02-25 16_04_18-Window.png)
 
+![](images/2023-02-25 16_18_24-Window.png)
+
 ## Customisation
 
-OK so you have an automated Kali build but it's not exactly what you want, here is how you can update / improve it to suit your needs. 
+OK so you have an automated Kali build but it's not exactly what you want, here is how you can update / improve it to suit your needs. The best source of information for Ansible is their online documentation https://docs.ansible.com/. If you're lazy you might get away with copy/pasting some of the examples below and modifying them to suit. 
 
 ### Copying Files
 
