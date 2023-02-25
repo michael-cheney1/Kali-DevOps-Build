@@ -89,7 +89,7 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 
 6. Hit the special key (`CTRL + A`) then capital i (`SHIFT + i`).
 
-<figure><img src="2023-02-25 16_32_10-Window.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="images/2023-02-25 16_32_10-Window.png" alt=""><figcaption></figcaption></figure>
 
 7. Once this has been completed hit `ESCAPE` to continue. 
 
