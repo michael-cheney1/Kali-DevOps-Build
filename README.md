@@ -76,6 +76,20 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 
 ![](images/2023-02-25 16_18_24-Window.png)
 
+4. Push `CTRL + Space` to initiate the guake console. Then `tmux`. 
+
+![](images/2023-02-25 16_26_06-Window.png)
+
+5. Once tmux has loaded we need to have it install some plugins. 
+
+![](images/2023-02-25 16_29_56-Window.png)
+
+6. Hit the special key (`CTRL + A`) then capital i (`SHIFT + i`).
+
+![](images/2023-02-25 16_32_10-Window.png)
+
+7. Once this has been completed hit `ESCAPE` to continue. 
+
 ## Customisation
 
 OK so you have an automated Kali build but it's not exactly what you want, here is how you can update / improve it to suit your needs. The best source of information for Ansible is their online documentation https://docs.ansible.com/. If you're lazy you might get away with copy/pasting some of the examples below and modifying them to suit. 
