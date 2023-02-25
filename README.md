@@ -9,7 +9,7 @@ Run ansible, get all packages, repositories and configurations required to make 
 
 Here is a quick preview of what it looks like. I did a quick speedrun of Legacy from HackTheBox to show some of the capabilities. 
 
-[![](https://markdown-videos.deta/youtube/vOhD8DcZgmA)](https://youtu.be/vOhD8DcZgmA)
+https://www.youtube.com/watch?v=vOhD8DcZgmA
 
 ### Summary
 
