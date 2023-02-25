@@ -7,7 +7,9 @@ Building your standard Kali environment using Ansible
 
 Run ansible, get all packages, repositories and configurations required to make the console pretty. Also get a script to load tmux with a nice template for playing CTFs. 
 
+Here is a quick preview of what it looks like. I did a quick speedrun of Legacy from HackTheBox to show some of the capabilities. 
 
+[![](https://markdown-videos.deta/youtube/vOhD8DcZgmA)](https://youtu.be/vOhD8DcZgmA)
 
 ### Summary
 
@@ -60,7 +62,9 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 6. Right click on the newly imported virtual machine and select `Power` -> `Start Up Guest`
 7. Once the machine has booted. Open a terminal and update packages. `sudo apt update; sudo apt upgrade -y`.
 
-## Installation
+## Guide
+
+### Installation
 
 1. Install Ansible `sudo apt install ansible -y`
 
@@ -89,6 +93,10 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 ![](images/2023-02-25 16_32_10-Window.png)
 
 7. Once this has been completed hit `ESCAPE` to continue. 
+
+### Using ctf script
+
+
 
 ## Customisation
 
