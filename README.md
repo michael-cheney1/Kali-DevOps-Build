@@ -72,25 +72,24 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 
 2. Clone the repository `git clone https://github.com/michael-cheney1/Kali-DevOps-Build.git`
 
-![images/](images/2023-02-25 15_56_02-Window.png)
+<figure><img src="images/2023-02-25 15_56_02-Window.png" alt=""><figcaption></figcaption></figure>
 
 3. Run Ansible configuration file `ansible-playbook Kali-DevOps-Build/setup.yaml`
 
-![](images/2023-02-25 16_04_18-Window.png)
-
-![](images/2023-02-25 16_18_24-Window.png)
+<figure><img src="images/2023-02-25 16_04_18-Window.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="images/2023-02-25 16_18_24-Window.png" alt=""><figcaption></figcaption></figure>
 
 4. Push `CTRL + Space` to initiate the guake console. Then `tmux`. 
 
-![](images/2023-02-25 16_26_06-Window.png)
+<figure><img src="images/2023-02-25 16_26_06-Window.png" alt=""><figcaption></figcaption></figure>
 
 5. Once tmux has loaded we need to have it install some plugins. 
 
-![](images/2023-02-25 16_29_56-Window.png)
+<figure><img src="images/2023-02-25 16_29_56-Window.png" alt=""><figcaption></figcaption></figure>
 
 6. Hit the special key (`CTRL + A`) then capital i (`SHIFT + i`).
 
-![](images/2023-02-25 16_32_10-Window.png)
+<figure><img src="2023-02-25 16_32_10-Window.png" alt=""><figcaption></figcaption></figure>
 
 7. Once this has been completed hit `ESCAPE` to continue. 
 
