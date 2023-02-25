@@ -1,15 +1,17 @@
-# Kali - DevOps - Build
+# Kali - Ansible - Build
 Building your standard Kali environment using Ansible
 
 ## Introduction
+
+### TLDR
+
+Run ansible, get all packages, repositories and configurations required to make the console pretty. Also get a nice script to load tmux with a nice template for playing CTFs. 
 
 ### Summary
 
 The purpose of this guide is to share with you my automated Kali build. Anyone who has used Kali for some time has no doubt broken it multiple times and been faced with the prospect of having to rebuild a machine that you have spent countless hours perfecting. Many people utilise Virtual Machines and snapshots to be able to have a **known good** build that they can simply clone. I have also used this approach in the past however updating to the latest build can become arduous and can occasionally break things.  So to simplify the process you can use automation then if you add packages / repositories / download files later it's relatively straight forward to add these items into an Ansible template especially when you have some examples to work from. 
 
 ### Features
-
-So why would you want to go to this trouble? Well apart from automating the installation of some packages and repositories that you might need this build will also install and configure
 
 **Guake** - A top-down terminal inspired by the famous terminal used in Quake. This has been modified with a custom theme which turns off transparency (to make screenshots less distracting), set's the default key combination to be `CTRL` + `Space` and configures it to use the Dracula theme. 
 
@@ -25,7 +27,7 @@ So why would you want to go to this trouble? Well apart from automating the inst
 
 ### **Custom Scripts & Configurations**
 
-* **ctf.sh** - Included is a custom script I wrote specifically for playing CTFs. It starts Tmux, then configures a basic layout including separate tabs for Enumeration, Exploits, Metasploit, Shells & Services. This script also sets the variables `$ip` (The remote host) & `$lhost` (The tun0 or ppp0 ip address) .
+* **ctf** - Included is a custom script I wrote specifically for playing CTFs. It starts Tmux, then configures a basic layout including separate tabs for Enumeration, Exploits, Metasploit, Shells & Services. This script also sets the variables `$ip` (The remote host) & `$lhost` (The tun0 or ppp0 ip address) .
   * **Enumeration** - nmap / gobuster / autorecon scans.
   * **Exploitation** - For running custom exploit scripts or attempting manual exploitation. 
   * **Metasploit** -  The metasploit tab runs the msfconsole command however it sets RHOST / RHOSTS / LHOST at a global level so these options usually are pre-configured in all modules. 
@@ -58,21 +60,71 @@ A base installation of Kali Linux. For this guide I downloaded the latest virtua
 
 ## Installation
 
-1. Git 
+1. Install Ansible `sudo apt install ansible -y`
+2. Clone the repository `git clone https://github.com/Michael-Cheney/Kali_Build.git`
+3. Run setup.yaml Ansible file `ansible-playbook Kali_Build/setup.yaml`
 
 
 
 ## Customisation
 
-OK so you have a automated Kali build but it's not exactly what you want here is how you can update / improve it to suit your workflow better. 
+OK so you have an automated Kali build but it's not exactly what you want, here is how you can update / improve it to suit your needs. 
+
+### Copying Files
+
+The below command shows the example of copying the `.zshrc` file from the cloned repository into the user profile location and setting the permissions and setting the correct owner & group for the file. You can copy & paste this section into the `setup.yaml` file and modify it to copy additional files if required. The comments have been added to the code below to assist in modifying the below template. Once you have modified it, it's probably best to remove the comments (Everything from the `#` to the end of the line).
+
+```yaml
+  - name: Copy a ZSH profile # Name of the Ansible task which is output to the command line. 
+    ansible.builtin.copy: # Don't change this line. 
+      src: /home/kali/Kali_Build/config/.zshrc # Source on the local file system. 
+      dest: /home/kali/.zshrc # Desination on the local file system.
+      owner: kali # Set the owner.
+      group: kali # Set the group.
+      mode: '0644' # Set the permissions on the destination file.
+```
+
+### Cloning Repositories
+
+The below example taken from `setup.yaml` shows an example of cloning a repository. 
+
+```yaml
+  - name: Clone tmux-plugin tpm github repository # Name of the Ansible task which is output to the command line. 
+    ansible.builtin.copy: # Don't change this line. 
+    git: # Don't change this line. 
+      repo: https://github.com/tmux-plugins/tpm # Source repository.
+      dest: /home/kali/.tmux/plugins/tpm # Destination on the local file system.
+      clone: yes # Set this to yes to clone
+      update: yes # Set this to update to have it update the repository if it already exists.
+```
+
+### Creating Directories
+
+The below example shows how to create a directory for the scripts. 
+
+```yaml
+  - name: Create directory for scripts # Name of the Ansible task which is output to the command line. 
+    file: # Don't change this line. 
+      path: /home/kali/scripts # Set the path to the directory that you want to create.
+      state: directory # Don't change this line. 
+```
 
 ### Installing Packages
 
-All packages are install by the setup.yaml Ansible file. 
+All packages are installed by the `setup.yaml` Ansible file. The below excerpt is to install guake. This is the equivalent on Kali of running the command `sudo apt install guake`. So if you want to remove packages just remove the section, or if you want additional packages just edit the `setup.yaml` file and copy the 4 lines show below and edit the 2 name fields. 
+
+```yaml
+name: Install guake #Name of the Ansible task which is output to the command line. 
+package: # Don't change this line. 
+  name: guake # Name of the package as it appears in the repository.
+  state: present # Set the state of the package. Leave it as this if you want it installed.
+```
+
+
 
 ## References
 
-A big thanks to the following people who I stole from for taking the time to document and share their hard work. 
+A big thanks to the following people for taking the time to document and share their work. 
 
 **André Brandão** - https://andrebrandao.me/articles/terminal-setup-with-zsh-tmux-dracula-theme/
 
@@ -81,6 +133,8 @@ A big thanks to the following people who I stole from for taking the time to doc
 **Ham Vocke** - https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
 
 **Nathan Broadbent** - https://madebynathan.com/2011/10/04/a-nicer-way-to-use-xclip/
+
+
 
 And the following projects for being awesome. 
 

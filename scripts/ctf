@@ -6,11 +6,11 @@ export lport2=443
 export lport3=4444
 mkdir $2
 cd $2
-tmux new-session -s $2 -n scans -d
-tmux new-window -n exploits -t $2
-tmux new-window -n metasploit -t $2
+tmux new-session -s $2 -n Enumeration -d
+tmux new-window -n Exploitation -t $2
+tmux new-window -n Metasploit -t $2
 tmux send-keys -t $2 'msfconsole -q --execute-command "setg RHOST $ip; setg LHOST $lhost; setg RHOSTS $ip; clear;"' C-m
-tmux new-window -n shells -t $2
+tmux new-window -n Shells -t $2
 tmux send-keys -t $2 'exec bash --login' C-m
 tmux send-keys -t $2 'clear' C-m
 tmux send-keys -t $2 'nc -lvnp 53' C-m
@@ -19,8 +19,8 @@ tmux send-keys -t $2 'exec bash --login' C-m
 tmux send-keys -t $2 'clear' C-m
 tmux send-keys -t $2 'nc -lvnp 443' C-m
 tmux split-window -h -t $2
-tmux send-keys -t $2 'nc -lvp 235 > privesc.tar' C-m
-tmux new-window -n services -t $2
+tmux send-keys -t $2 'nc -lvp 235 > file' C-m
+tmux new-window -n Services -t $2
 tmux send-keys -t $2 'cd /home/kali/share/' C-m
 tmux send-keys -t $2 'clear' C-m
 tmux send-keys -t $2 'python3 -m http.server 80' C-m
